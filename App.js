@@ -1,21 +1,38 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import styled from "styled-components";
+import { Text, View } from "react-native";
+import CheckList from "./components/CheckList";
 
-export default function App() {
+import { ListProvider } from "./components/ListContext";
+import FooterInput from "./components/FooterInput";
+
+const App = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <ListProvider>
+      <AppView>
+        <Title>Todo List</Title>
+        <CheckList />
+        <FooterInput />
+      </AppView>
+    </ListProvider>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const AppView = styled(View)`
+  flex: 1;
+  background: #eeede7;
+  position: relative;
+`;
+
+const Title = styled(Text)`
+  color: #05445e;
+  font-weight: bold;
+  font-size: 20px;
+  border-radius: 5px;
+  width: 90%;
+  margin-left: 5%;
+  margin-top: 20%;
+  padding: 15px;
+`;
+
+export default App;
