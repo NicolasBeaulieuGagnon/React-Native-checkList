@@ -2,14 +2,21 @@ import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import styled from "styled-components";
 
-const ListItem = ({ item: { value, completed, _id }, toggleComplete }) => {
+const ListItem = ({
+  item: { value, completed, _id },
+  index,
+  toggleComplete,
+  removeItem,
+}) => {
   return (
     <Wrapper onPress={() => toggleComplete({ _id, value, completed })}>
-      <Square></Square>
+      <Square completed={completed}></Square>
       <Message completed={completed}>{value}</Message>
 
       <Remove completed={completed} disabled={!completed}>
-        <RemoveText completed={completed}>X</RemoveText>
+        <RemoveText onPress={() => removeItem(index)} completed={completed}>
+          x
+        </RemoveText>
       </Remove>
     </Wrapper>
   );
@@ -18,7 +25,7 @@ const ListItem = ({ item: { value, completed, _id }, toggleComplete }) => {
 const Square = styled(View)`
   width: 20px;
   height: 20px;
-  background: #7ec8e3;
+  background: ${({ completed }) => (completed ? "#d42902" : "#7ec8e3")};
   border-radius: 5px;
 `;
 
@@ -42,7 +49,6 @@ const Message = styled(Text)`
 `;
 
 const Remove = styled(TouchableOpacity)`
-  border: ${({ completed }) => (completed ? "1px solid white" : "none")};
   height: 26px;
   width: 26px;
   border-radius: 26px;
@@ -53,7 +59,7 @@ const Remove = styled(TouchableOpacity)`
 const RemoveText = styled(Text)`
   color: ${({ completed }) => (completed ? "black" : "rgba(1,1,1,0)")};
   font-weight: bold;
-  font-size: 17px;
+  font-size: 15px;
 `;
 
 export default ListItem;

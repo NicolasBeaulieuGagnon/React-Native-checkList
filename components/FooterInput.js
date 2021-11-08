@@ -26,6 +26,7 @@ const FooterInput = () => {
         value={value}
         onChangeText={(text) => setValue(text)}
         placeholder="Write a Task"
+        onSubmitEditing={addItem}
       />
       <AddTouch onPress={addItem}>
         <PlusView>
